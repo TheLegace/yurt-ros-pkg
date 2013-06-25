@@ -1,0 +1,35 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find mrp1_gazebo)/worlds/mrp1.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+<!--   <param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find mrp1_description)/urdf/mrp1_rviz.xacro'" /> -->
+  
+  <param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find mrp1_description)/urdf/mrp1.xacro'" />    
+    <!--Controller Manager-->
+  
+  <include file="$(find pr2_controller_manager)/controller_manager.launch" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+      <param name="use_gui" value="False"/>
+  </node>
+  <!-- joint states to tf -->  
+  <node pkg="robot_state_publisher" type="state_publisher" name="mrp1_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <remap from="joint_states" to="/mrp1/joint_states" />
+  </node>
+  
+  <!-- TF Buffer Server -->
+  <node pkg="tf2_ros" type="buffer_server" name="tf2_buffer_server" output="screen">
+    <param name="buffer_size" value="1200.0"/>
+  </node>    
+
+  <!-- Call a python script to the run a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model mrp1 -param robot_description"/>
+  <!-- Spawn a robot into Gazebo -->
+</launch>

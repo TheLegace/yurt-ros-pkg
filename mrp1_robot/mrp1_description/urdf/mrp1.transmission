@@ -1,0 +1,22 @@
+<robot name="mrp1">      
+  <transmission name="front_right_wheel_trans" type="pr2_mechanism_model/SimpleTransmission">
+    <actuator name="front_right_wheel_motor"/>
+    <joint name="front_right_wheel_joint"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>  
+  <transmission name="front_left_wheel_trans" type="pr2_mechanism_model/SimpleTransmission">
+    <actuator name="front_left_wheel_motor"/>
+    <joint name="front_left_wheel_joint"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>   
+  <transmission name="rear_right_wheel_trans" type="pr2_mechanism_model/SimpleTransmission">
+    <actuator name="rear_right_wheel_motor"/>
+    <joint name="rear_right_wheel_joint"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>  
+  <transmission name="rear_left_wheel_trans" type="pr2_mechanism_model/SimpleTransmission">
+    <actuator name="rear_left_wheel_motor"/>
+    <joint name="rear_left_wheel_joint"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>      
+</robot>

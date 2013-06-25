@@ -1,0 +1,64 @@
+<scene exported_by="thelegace" formatVersion="1.0.1" previous_export_time="1346981038.571357" export_time="1346982532.649095" >
+	<nodes >
+		<node name="Model" >
+			<position y="0.000000" x="0.000000" z="-0.000000" />
+			<rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+			<scale y="1.000000" x="1.000000" z="1.000000" />
+			<game >
+				<sensors />
+				<actuators />
+			</game>
+			<node name="convexhull" >
+				<position y="0.000000" x="0.000000" z="-0.000000" />
+				<rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+				<scale y="1.000000" x="1.000000" z="1.000000" />
+				<game >
+					<sensors />
+					<actuators />
+				</game>
+				<node name="Mesh02" >
+					<position y="0.000000" x="0.000000" z="-0.000000" />
+					<rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+					<scale y="1.000000" x="1.000000" z="1.000000" />
+					<game >
+						<sensors />
+						<actuators />
+					</game>
+					<entity anisotropic_friction="False" lock_trans_y="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" actor="False" velocity_min="0.0" lock_trans_z="False" physics_type="STATIC" lock_trans_x="False" meshFile="Mesh02.001.mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" velocity_max="0.0" ghost="False" name="Mesh02.001" mass_radius="1.0" mass="1.0" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" />
+				</node>
+				<node name="suspension-bottom" >
+					<position y="0.000000" x="0.000000" z="-0.000000" />
+					<rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+					<scale y="1.000000" x="1.000000" z="1.000000" />
+					<game >
+						<sensors />
+						<actuators />
+					</game>
+					<entity anisotropic_friction="False" lock_trans_y="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" actor="False" velocity_min="0.0" lock_trans_z="False" physics_type="STATIC" lock_trans_x="False" meshFile="Mesh01.001.mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" velocity_max="0.0" ghost="False" name="Mesh01.001" mass_radius="1.0" mass="1.0" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" />
+				</node>
+			</node>
+		</node>
+	</nodes>
+	<externals >
+		<item type="material" >
+			<file name="/home/thelegace/fuerte_workspace/yurt_rover/yurt_descrtiption/Media/models/_Color_0.material" />
+		</item>
+		<item type="material" >
+			<file name="/home/thelegace/fuerte_workspace/yurt_rover/yurt_descrtiption/Media/models/Color_00.material" />
+		</item>
+		<item type="material" >
+			<file name="/home/thelegace/fuerte_workspace/yurt_rover/yurt_descrtiption/Media/models/Color_01.material" />
+		</item>
+		<item type="material" >
+			<file name="/home/thelegace/fuerte_workspace/yurt_rover/yurt_descrtiption/Media/models/Color_A0.material" />
+		</item>
+		<item type="material" >
+			<file name="/home/thelegace/fuerte_workspace/yurt_rover/yurt_descrtiption/Media/models/FrontCol.material" />
+		</item>
+	</externals>
+	<environment >
+		<colourBackground r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+		<colourAmbient r="0.0" b="0.0" g="0.0" />
+		<colourDiffuse r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+	</environment>
+</scene>

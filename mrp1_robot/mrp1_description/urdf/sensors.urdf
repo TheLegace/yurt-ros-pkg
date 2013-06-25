@@ -1,0 +1,105 @@
+<robot name="mrp1">
+  <!-- imu -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+  </joint>
+  <gazebo reference="imu_link">
+    <!-- this is expected to be reparented to pelvis with appropriate offset
+         when imu_link is reduced by fixed joint reduction -->
+    <!-- todo: this is working with gazebo 1.4, need to write a unit test -->
+    <sensor name="imu_sensor" type="imu">
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>     
+    </sensor>     
+  </gazebo>
+  <gazebo>
+    <!-- <plugin filename="libgazebo_ros_imu.so" name="gazebo_ros_imu"> -->
+    <plugin filename="libImuROSPlugin.so" name="ImuROSPlugin">  
+      <bodyName>imu_link</bodyName>
+      <updateRate>1</updateRate>
+      <serviceName>mrp1_imu</serviceName>
+      <topicName>mrp1_imu</topicName>
+      <gaussianNoise>0</gaussianNoise><!--2.89e-08-->
+      <xyzOffset>0 0 0</xyzOffset>
+      <rpyOffset>0 0 0</rpyOffset>
+    </plugin>     
+  </gazebo>  
+  
+  <link name="hokuyo_link">
+    <inertial>
+      <mass value="0.01" />
+      <origin xyz="0.01 0 0.0175" rpy="0 0 -1.57079633" />
+      <inertia ixx="0.001"  ixy="0.0"  ixz="0.0"
+               iyy="0.001"  iyz="0.0"
+               izz="0.001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 -1.57079633"/>
+      <geometry>
+        <mesh filename="package://mrp1_description/meshes/hokuyo.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.01 0 0.0175" rpy="0 0 -1.57079633"/>
+      <geometry>
+        <mesh filename="package://mrp1_description/meshes/hokuyo.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link> 
+    
+  <joint name="hokuyo_joint" type="fixed">
+      <origin xyz="0 -0.610 0.1425" rpy="0 0 -1.57079633" />
+      <parent link="base_link" />
+      <child link="hokuyo_link"/>
+  </joint>
+  
+  <gazebo reference="hokuyo_link">
+    <gravity>false</gravity>
+    
+    <sensor name="laser" type="ray">
+      <pose>0.01 0 0.0175 0 0 0</pose>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>640</samples>
+            <resolution>1</resolution>
+            <min_angle>-2.0943951</min_angle>
+            <max_angle>2.0943951</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.08</min>
+          <max>10</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+  
+      <plugin name="laser" filename="libgazebo_ros_laser.so">
+        <frameName>hokuyo_link</frameName>
+        <gaussianNoise>0.005</gaussianNoise>
+        <robotNamespace>mrp1_robot</robotNamespace>
+        <topicName>laser_scan</topicName>
+        <updateRate>10</updateRate>
+      </plugin>
+      <plugin name="laser" filename="libRayPlugin.so" />
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+</robot>

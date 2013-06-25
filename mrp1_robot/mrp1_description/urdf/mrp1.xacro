@@ -1,0 +1,247 @@
+<?xml version="1.0"?> 
+<!-- continuous-continuous Manipulator -->
+<robot name="mrp1" 
+  xmlns:xacro="http://www.ros.org/wiki/xacro"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller">  
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find mrp1_description)/urdf/mrp1.gazebo" />
+  \<xacro:include filename="$(find mrp1_description)/urdf/mrp1.transmission" />
+
+
+  <link name="base_footprint">
+      <origin xyz="0 0 0.0" rpy="0 0 1.57079633" />
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0" 
+                 izz="0.0001" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0.0" rpy="0 0 1.57079633" />
+        <geometry>
+          <box size="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0.0" rpy="0 0 1.57079633" />
+        <geometry>
+          <box size="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+  </link>
+    
+  <link name="base_link">
+    <inertial>
+        <mass value="10" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.10" ixy="0.0" ixz="0.0"
+                 iyy="0.10" iyz="0.0" 
+                 izz="0.10" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+              <mesh filename="package://mrp1_description/meshes/chassis-suspension.dae" />
+          </geometry>
+      </visual>
+      <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+              <mesh filename="package://mrp1_description/meshes/chassis-suspension.dae" />
+          </geometry>
+      </collision>
+  </link>
+  
+  <joint name="base_footprint_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 1.57079633" />
+      <parent link="base_footprint"/>
+      <child link="base_link" />
+  </joint>  
+  
+  <link name="front_right_wheel_link">
+    <inertial>
+        <mass value="1" />
+        <origin xyz="0 0 0" />
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
+                  iyy="1.0" iyz="0.0"
+                  izz="1.0" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>                                      
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </collision>
+  </link>
+
+  <link name="front_left_wheel_link">
+    <inertial>
+        <mass value="1" />
+        <origin xyz="0 0 0" rpy="0 0 3.14159265" />
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
+                  iyy="1.0" iyz="0.0"
+                  izz="1.0" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 3.14159265" />
+        <geometry>
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+        <geometry>                                      
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </collision>
+  </link>
+  
+  <link name="rear_right_wheel_link">
+    <inertial>
+        <mass value="1" />
+        <origin xyz="0 0 0" />
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
+                  iyy="1.0" iyz="0.0"
+                  izz="1.0" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>                                      
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </collision>
+  </link>
+
+  <link name="rear_left_wheel_link">
+    <inertial>
+        <mass value="1" />
+        <origin xyz="0 0 0" />
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
+                  iyy="1.0" iyz="0.0"
+                  izz="1.0" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 3.14159265" />
+        <geometry>
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 3.14159265" />
+        <geometry>                                      
+            <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+        </geometry>
+    </collision>
+  </link>
+  
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 -0.30 0.15" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://mrp1_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>  
+
+<!--   <joint name="front_right_wheel_joint" type="continuous">
+    <axis xyz="0 0 1" />
+    <origin xyz="0.515 0.3850 -0.230" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="front_right_wheel_link"/>
+  </joint> -->
+
+<!--   <link name="front_right_wheel_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+          <mesh filename="package://mrp1_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>     -->
+
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="front_right_wheel_link" />
+    <axis xyz="1 0 0" />
+    <origin xyz="0.515 0.3850 -0.230" rpy="0 0 0" />
+    <dynamics damping="0.7"/>    
+    <limit effort="100" velocity="200" />
+  </joint>
+    
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="front_left_wheel_link" />
+    <axis xyz="1 0 0" />
+    <origin xyz="-0.4800 0.3850 -0.230" rpy="0 0 0" />
+    <dynamics damping="0.7"/>
+    <limit effort="100" velocity="200" />
+  </joint>  
+  
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="rear_right_wheel_link" />
+    <axis xyz="1 0 0" />
+    <origin xyz="0.515 -0.3850 -0.230" rpy="0 0 0" />
+    <dynamics damping="0.7"/>  
+    <limit effort="100" velocity="200" />
+  </joint>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="rear_left_wheel_link" />
+    <axis xyz="1 0 0" />
+    <origin xyz="-0.4800 -0.3850 -0.230" rpy="0 0 0" />
+    <dynamics damping="0.7"/>  
+    <limit effort="100" velocity="200" />
+  </joint>
+  
+</robot>
