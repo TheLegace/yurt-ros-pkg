@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+
+ <launch>
+  <!-- <param name="/use_sim_time" type="bool" value="true"/> -->
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find mrp1_gazebo)/worlds/mrp1.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+
+  <include file="$(find mrp1_gazebo)/launch/spawn_mrp1_slam.launch" />
+ </launch>

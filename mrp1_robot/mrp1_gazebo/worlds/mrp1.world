@@ -7,5 +7,9 @@
     <include>
       <uri>model://sun</uri>
     </include>  
+    <include>
+      <uri>model://willowgarage</uri>
+      <pose>-47 -35 0 0 0 0</pose>
+    </include>      
   </world>
 </sdf>
