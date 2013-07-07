@@ -1,0 +1,35 @@
+<launch>
+  
+  <arg name="gzname" default="gazebo"/>
+  <arg name="gzworld" default="$(find ales_description)/worlds/lunapit.world"/>
+  <param name="/use_sim_time" type="bool" value="true"/>
+
+  <!-- start gazebo with the Atlas -->
+  <node name="gazebo" pkg="atlas_utils" type="run_$(arg gzname)" args="$(arg gzworld)" output="screen" />
+  
+  <!-- Robot Description -->
+  <param name="robot_description" textfile="$(find ales_description)/robots/ales_rviz.urdf"/>
+  
+  <!--Controller Manager-->
+  <include file="$(find pr2_controller_manager)/controller_manager.launch" />
+
+ 
+  <!-- joint states to tf -->  
+  <node pkg="robot_state_publisher" type="state_publisher" name="ales_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <remap from="joint_states" to="/ales/joint_states" />
+  </node>
+  
+  
+  <!-- TF Buffer Server -->
+  <node pkg="tf2_ros" type="buffer_server" name="tf2_buffer_server" output="screen">
+    <param name="buffer_size" value="1200.0"/>
+  </node>
+  
+  <node pkg="ales_odometry" type="ales_odometry" name="ales_odom_node" output="screen">
+  </node>
+  
+  <node pkg="erratic_teleop" type="erratic_keyboard_teleop" name="erratic_keyboard_teleop_node">
+  </node>
+  
+</launch>

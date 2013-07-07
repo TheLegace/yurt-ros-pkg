@@ -1,0 +1,33 @@
+<launch>
+
+<!--   <param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find ales_description)/urdf/ales_rviz.xacro'" /> -->
+  
+  <param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find ales_description)/urdf/ales.xacro'" />    
+    <!--Controller Manager-->
+  
+  <include file="$(find pr2_controller_manager)/controller_manager.launch" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+      <param name="use_gui" value="False"/>
+  </node>
+  <!-- joint states to tf -->  
+  <node pkg="robot_state_publisher" type="state_publisher" name="ales_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <remap from="joint_states" to="/ales/joint_states" />
+  </node>
+  
+  <!-- TF Buffer Server -->
+  <node pkg="tf2_ros" type="buffer_server" name="tf2_buffer_server" output="screen">
+    <param name="buffer_size" value="1200.0"/>
+  </node>    
+  
+  <node pkg="rviz" type="rviz" name="rviz"/>
+    <!-- args="-d $(find ales_navigation)/rviz_cfg/ales.rviz"-->  
+
+  <!-- Call a python script to the run a service call to gazebo_ros to spawn a URDF robot -->
+<!--   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model ales -param robot_description"/> -->
+  <!-- Spawn a robot into Gazebo -->
+</launch>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+
+ <launch>
+  
+  <include file="$(find hector_geotiff)/launch/geotiff_mapper.launch">
+    <arg name="trajectory_source_frame_name" value="scanmatcher_frame"/> 
+  </include>
+
+  <node pkg="hector_exploration_node" type="exploration_planner_node" name="hector_exploration_node" output="screen">
+    <rosparam file="$(find ales_navigation)/config/costmap.yaml" command="load" />
+  </node>
+  
+  <node ns="move_base/local_costmap" name="voxel_grid_throttle" pkg="topic_tools" type="throttle" args="messages voxel_grid 3.0 voxel_grid_throttled" />
+
+  <node ns="move_base_node/local_costmap" name="voxel_grid_throttle" pkg="topic_tools" type="throttle" args="messages voxel_grid 3.0 voxel_grid_throttled" />  
+  
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    
+    <param name="controller_frequency" value="20.0" />
+    <remap from="/odom" to="/scanmatch_odom" />
+    <remap from="cmd_vel" to="cmd_vel" />
+    
+    <!-- SELECT LOCAL PLANNER -->
+    <!-- base_local_planner -->
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />   
+    <rosparam file="$(find ales_navigation)/config/base_local_planner_params.yaml" command="load" />
+    
+    <!-- COSTMAP PARAMETERS -->
+    <rosparam file="$(find ales_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find ales_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find ales_navigation)/config/local_costmap_params.yaml"  command="load" />
+    <rosparam file="$(find ales_navigation)/config/costmap.yaml" command="load" />   
+  </node>
+ 
+
+ </launch>
