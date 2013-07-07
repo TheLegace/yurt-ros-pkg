@@ -1,7 +1,7 @@
 obstacle_range: 2.5
 raytrace_range: 3.0
 footprint: [[-0.72, -0.62], [-0.72, 0.62], [0.60, 0.60], [0.80, 0.0], [0.60, -0.60]]
-footprint_padding: 0.01
+footprint_padding: 0.05
 inflation_radius: 0.60
 
 observation_sources: hokuyo_laser

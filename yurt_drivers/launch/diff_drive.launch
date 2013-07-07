@@ -1,0 +1,10 @@
+<launch>
+
+  <node name="diff_drive" pkg="yurt_drivers" type="yurt_driver.py" output="screen">
+    <rosparam file="$(find yurt_drivers)/config/diff_drive.yaml" command="load" />
+  </node>
+
+  <node name="gamepaddrive" pkg="yurt_drivers" type="gamepaddrive.py">
+  </node>
+
+</launch>

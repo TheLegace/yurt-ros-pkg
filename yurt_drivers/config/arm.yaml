@@ -1,0 +1,8 @@
+board_id: 2
+port: /dev/ttyUSB0
+joints: {
+    arm_shoulder_pan_joint: {id: 2, neutral: 205, max_angle: 180, min_angle: -60, max_speed: 90},
+}
+controllers: {
+    arm_controller: {type: servo_controller, joints: [arm_shoulder_pan_joint] }
+}

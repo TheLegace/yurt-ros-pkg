@@ -1,0 +1,6 @@
+board_id: 2
+port: /dev/ttyACM0
+rate: 100
+controllers : {
+    base_controller: {type: diff_controller, base_width: 0.70}
+}

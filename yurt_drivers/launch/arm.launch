@@ -1,0 +1,7 @@
+<launch>
+
+  <node name="arm_driver" pkg="yurt_drivers" type="yurt_driver.py" output="screen">
+      <rosparam file="$(find yurt_drivers)/config/arm.yaml" command="load" />
+  </node>
+
+</launch>

@@ -1,9 +1,4 @@
 <launch>
-  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find mrp1_gazebo)/worlds/mrp1.world"/>
-    <!-- more default parameters can be changed here -->
-  </include>
 
 <!--   <param name="robot_description"
     command="$(find xacro)/xacro.py '$(find mrp1_description)/urdf/mrp1_rviz.xacro'" /> -->
