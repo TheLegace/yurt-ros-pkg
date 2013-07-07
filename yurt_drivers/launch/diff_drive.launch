@@ -4,7 +4,4 @@
     <rosparam file="$(find yurt_drivers)/config/diff_drive.yaml" command="load" />
   </node>
 
-  <node name="gamepaddrive" pkg="yurt_drivers" type="gamepaddrive.py">
-  </node>
-
 </launch>

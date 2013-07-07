@@ -104,8 +104,10 @@ class DiffController(Controller):
     def update(self):
     
         now = rospy.Time.now()
-        self.right = 0.6225 * (self.dx + self.dr * self.base_width)
-        self.left = 0.6225 * (self.dx - self.dr * self.base_width)
+        self.right = 0.585 * (self.dx + self.dr * self.base_width)
+        self.left = 0.585 * (self.dx - self.dr * self.base_width)
+        # self.right = 0.85 * self.dx + self.dr * self.base_width
+        # self.left = 0.85 * self.dx - self.dr * self.base_width         
 
         if now > self.t_next:
             elapsed = now - self.then
