@@ -192,14 +192,29 @@
       <updateRate>1000.0</updateRate>
     </plugin> 
 
-    <plugin name="diff_drive" filename="libgazebo_ros_diffdrive.so">
+<!--     <plugin name="diff_drive" filename="libgazebo_ros_diffdrive.so">
       <topic_name>cmd_vel</topic_name>
       <robotBaseFrame>base_footprint</robotBaseFrame>      
       <base_footprint>base_footprint</base_footprint>
       <left_joint>rear_right_wheel_joint</left_joint>
       <right_joint>rear_left_wheel_joint</right_joint>
       <torque>250</torque>
-    </plugin>     
+    </plugin>   -->   
+<!--     <plugin name="skid_steer_drive" filename="libgazebo_ros_skid_steer_drive.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>/odom_skidsteer</odometryTopic>
+      <odometryFrame>odom_skidsteer</odometryFrame>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <updateRate>100</updateRate>
+      <base_footprint>base_footprint</base_footprint>
+      <wheelDiameter>0.254</wheelDiameter>      
+      <wheelSeparation>0.556</wheelSeparation>
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>rear_right_wheel_joint</rightRearJoint>
+      <torque>60</torque>
+    </plugin>       -->
   </gazebo>    
 
 </robot>
