@@ -191,7 +191,7 @@ class DiffController(Controller):
         back = int(self.conv_msg.back*MAX_VAL)
         vertical = int(self.conv_msg.vertical*MAX_VAL)
         self.device.setSpeed(SETPOINT3, front)
-        # self.device.setSpeed(SETPOINT6, back)
+        self.device.setSpeed(SETPOINT5, back)
         self.device.setSpeed([SETPOINT4,SETPOINT4], [vertical, vertical]) 
         # rospy.loginfo("Front: " + str(front) + " Vertical: " + str(vertical))
     
