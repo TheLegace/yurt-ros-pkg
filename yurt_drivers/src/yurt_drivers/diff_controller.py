@@ -33,7 +33,7 @@ from math import sin,cos,pi,sqrt
 
 from geometry_msgs.msg import Quaternion
 from geometry_msgs.msg import Twist
-# from mrp1_operator import Conveyor
+from ales_description.msg import Conveyor
 from tf.broadcaster import TransformBroadcaster
 
 
@@ -92,7 +92,7 @@ class DiffController(Controller):
 
         # subscriptions
         rospy.Subscriber("cmd_vel", Twist, self.cmdVelCb)
-        # rospy.Subscriber("BASE_conveyor", Conveyor, self.cmd_conv_handler)
+        rospy.Subscriber("BASE_conveyor", Conveyor, self.cmd_conv_handler)
         # self.odomPub = rospy.Publisher("odom",Odometry)
         # self.odomBroadcaster = TransformBroadcaster()
         
@@ -185,14 +185,15 @@ class DiffController(Controller):
     ###
     ###  status:
     ### 
-    # def cmd_conv_handler(self, msg):
-    #     self.conv_msg = msg
-    #     front = int(self.conv_msg.front*MAX_VAL)
-    #     back = int(self.conv_msg.back*MAX_VAL)
-    #     vertical = int(self.conv_msg.vertical*MAX_VAL)
-    #     self.device.setSpeed(SETPOINT5, front)
-    #     self.device.setSpeed(SETPOINT6, back)
-    #     self.device.setSpeed([SETPOINT7,SETPOINT8], [vertical, vertical]) 
+    def cmd_conv_handler(self, msg):
+        self.conv_msg = msg
+        front = int(self.conv_msg.front*MAX_VAL)
+        back = int(self.conv_msg.back*MAX_VAL)
+        vertical = int(self.conv_msg.vertical*MAX_VAL)
+        self.device.setSpeed(SETPOINT3, front)
+        # self.device.setSpeed(SETPOINT6, back)
+        self.device.setSpeed([SETPOINT4,SETPOINT4], [vertical, vertical]) 
+        # rospy.loginfo("Front: " + str(front) + " Vertical: " + str(vertical))
     
     def setup(self):
         pass

@@ -35,20 +35,23 @@
     
   <link name="base_link">
     <inertial>
-        <mass value="15" />
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0"
-                 iyy="1.0" iyz="0.0" 
-                 izz="1.0" />
+        <mass value="35" />
+        <origin xyz="0 0 0" rpy="0 0 3.141592"/>
+        <inertia ixx="15.86" ixy="-12.099" ixz="15.696"
+                 iyx="-12.099" iyy="2.043" iyz="12.722" 
+                 izx="15.696" izy="12.722" izz="19.371" />        
+<!--         <inertia ixx="0.10" ixy="0.0" ixz="0.0"
+                 iyy="0.10" iyz="0.0" 
+                 izz="0.10" /> -->
     </inertial>
     <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 3.141592"/>
         <geometry>
               <mesh filename="package://ales_description/meshes/ales_chassis.dae" />
           </geometry>
       </visual>
       <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
+          <origin xyz="0 0 0" rpy="0 0 3.141592" />
           <geometry>
               <mesh filename="package://ales_description/meshes/ales_chassis.dae" />
           </geometry>
@@ -62,13 +65,16 @@
   </joint>  
 
   
-  <link name="front_right_wheel_link">
+  <link name="rear_right_wheel_link">
     <inertial>
-        <mass value="2" />
+        <mass value="7.5" />
         <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
-                  iyy="1.0" iyz="0.0"
-                  izz="1.0" />
+<!--         <inertia  ixx="0.10" ixy="0.0" ixz="0.0"
+                  iyy="0.10" iyz="0.0"
+                  izz="0.10" /> -->
+        <inertia  ixx="0.012411765597" ixy="0.0" ixz="0.0"
+                  iyy="0.015218160428" iyz="0.0"
+                  izz="0.011763977943" />                   
     </inertial>
     <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -84,14 +90,17 @@
     </collision>
   </link>
 
-
-  <link name="rear_right_wheel_link">
+ 
+  <link name="rear_left_wheel_link">
     <inertial>
-        <mass value="2" />
+        <mass value="7.5" />
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
-                  iyy="1.0" iyz="0.0"
-                  izz="1.0" />
+<!--         <inertia  ixx="0.10" ixy="0.0" ixz="0.0"
+                  iyy="0.10" iyz="0.0"
+                  izz="0.10" /> -->
+        <inertia  ixx="0.012411765597" ixy="0.0" ixz="0.0"
+                  iyy="0.015218160428" iyz="0.0"
+                  izz="0.011763977943" />                   
     </inertial>
     <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -106,15 +115,18 @@
         </geometry>
     </collision>
   </link>  
-
+ 
   
-  <link name="front_left_wheel_link">
+  <link name="front_right_wheel_link">
     <inertial>
-        <mass value="2" />
+        <mass value="7.5" />
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
-                  iyy="1.0" iyz="0.0"
-                  izz="1.0" />
+<!--         <inertia  ixx="0.10" ixy="0.0" ixz="0.0"
+                  iyy="0.10" iyz="0.0"
+                  izz="0.10" /> -->
+        <inertia  ixx="0.012411765597" ixy="0.0" ixz="0.0"
+                  iyy="0.015218160428" iyz="0.0"
+                  izz="0.011763977943" />       
     </inertial>
     <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -130,13 +142,16 @@
     </collision>
   </link>
 
-  <link name="rear_left_wheel_link">
+  <link name="front_left_wheel_link">
     <inertial>
-        <mass value="2" />
+        <mass value="7.5" />
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0"
-                  iyy="1.0" iyz="0.0"
-                  izz="1.0" />
+<!--         <inertia  ixx="0.10" ixy="0.0" ixz="0.0"
+                  iyy="0.10" iyz="0.0"
+                  izz="0.10" /> -->
+        <inertia  ixx="0.012411765597" ixy="0.0" ixz="0.0"
+                  iyy="0.015218160428" iyz="0.0"
+                  izz="0.011763977943" />                   
     </inertial>
     <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -150,42 +165,42 @@
             <mesh filename="package://ales_description/meshes/ales_wheel.dae"/>
         </geometry>
     </collision>
-  </link>
+  </link> 
+
+ <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="front_right_wheel_link" />
+    <axis xyz="1 0 0" />
+    <origin xyz="0.3815 -0.287 -0.121" rpy="0 0 1.570796" />
+    <dynamics damping="5.0" />    
+    <limit effort="150" velocity="75" />
+  </joint> 
 
   <joint name="front_left_wheel_joint" type="continuous">
     <parent link="base_link" />
     <child link="front_left_wheel_link" />
     <axis xyz="1 0 0" />
-    <origin xyz="0.2870 -0.381 -0.121" rpy="0 0 0" />
-    <dynamics damping="0.7"/>    
-    <limit effort="150" velocity="50" />
-  </joint> 
+    <origin xyz="0.3815 0.275 -0.121" rpy="0 0 1.570796" />
+    <dynamics damping="5.0" />  
+    <limit effort="150" velocity="75" />
+  </joint>   
 
-  <joint name="rear_left_wheel_joint" type="continuous">
-    <parent link="base_link" />
-    <child link="rear_left_wheel_link" />
-    <axis xyz="1 0 0" />
-    <origin xyz="0.2870 0.1790 -0.121" rpy="0 0 0" />
-    <dynamics damping="0.7"/>  
-    <limit effort="100" velocity="250" />
-  </joint>  
-
-  <joint name="front_right_wheel_joint" type="continuous">
-    <parent link="base_link" />
-    <child link="front_right_wheel_link" />
-    <axis xyz="1 0 0" />
-    <origin xyz="-0.300 -0.381 -0.121" rpy="0 0 0" />
-    <dynamics damping="0.7"/>  
-    <limit effort="100" velocity="250" />
-  </joint>
-  
   <joint name="rear_right_wheel_joint" type="continuous">
     <parent link="base_link" />
     <child link="rear_right_wheel_link" />
     <axis xyz="1 0 0" />
-    <origin xyz="-0.300 0.1790 -0.121" rpy="0 0 0" />
-    <dynamics damping="0.7"/>
-    <limit effort="100" velocity="250" />
-  </joint>  
+    <origin xyz="-0.1750 -0.287 -0.121" rpy="0 0 1.570796" />
+    <dynamics damping="5.0" />  
+    <limit effort="150" velocity="75" />
+  </joint>
+  
+ <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="rear_left_wheel_link" />
+    <axis xyz="1 0 0" />
+    <origin xyz="-0.1750 0.285 -0.121" rpy="0 0 1.570796" />
+    <dynamics damping="5.0" />
+    <limit effort="150" velocity="75" />
+  </joint>   
   
 </robot>

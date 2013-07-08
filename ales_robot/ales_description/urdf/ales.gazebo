@@ -88,7 +88,7 @@
 
   <joint name="hokuyo_joint" type="fixed">
     <axis xyz="0 1 0" />
-    <origin xyz="0.68 0 0.465" rpy="0 0 0"/>
+    <origin xyz="0.68 0 0.105" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="hokuyo_link"/>
   </joint>
@@ -152,33 +152,33 @@
     </sensor>
   </gazebo>
 
-<!--   <gazebo reference="front_wheel_left_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo> -->
-<!--   <gazebo reference="front_wheel_right_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo> -->
+  <gazebo reference="front_wheel_left_link">
+    <mu1>0.45</mu1>
+    <mu2>0.35</mu2>
+  </gazebo>
+  <gazebo reference="front_wheel_right_link">
+    <mu1>0.45</mu1>
+    <mu2>0.35</mu2>
+  </gazebo>
   
-<!--   <gazebo reference="rear_wheel_left_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+  <gazebo reference="rear_wheel_left_link">
+    <mu1>0.45</mu1>
+    <mu2>0.35</mu2>
   </gazebo>
 
   <gazebo reference="rear_wheel_left_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>       -->
+    <mu1>0.45</mu1>
+    <mu2>0.35</mu2>
+  </gazebo>      
 
   <gazebo>
-    <plugin filename="libgazebo_ros_p3d.so" name="gazebo_ros_p3d">
+<!--     <plugin filename="libgazebo_ros_p3d.so" name="gazebo_ros_p3d">
       <bodyName>base_link</bodyName>
       <topicName>/ground_truth_odom</topicName>
       <frameName>map</frameName>
       <alwaysOn>true</alwaysOn>
       <updateRate>100.0</updateRate>
-    </plugin>
+    </plugin> -->
         
     <plugin filename="libgazebo_ros_controller_manager.so" name="gazebo_ros_controller_manager">
       <alwaysOn>true</alwaysOn>
@@ -199,13 +199,13 @@
       <left_joint>rear_right_wheel_joint</left_joint>
       <right_joint>rear_left_wheel_joint</right_joint>
       <torque>250</torque>
-    </plugin>   -->   
-<!--     <plugin name="skid_steer_drive" filename="libgazebo_ros_skid_steer_drive.so">
+    </plugin>      -->
+    <plugin name="skid_steer_drive" filename="libgazebo_ros_skid_steer_drive.so">
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>/odom_skidsteer</odometryTopic>
       <odometryFrame>odom_skidsteer</odometryFrame>
       <robotBaseFrame>base_footprint</robotBaseFrame>
-      <updateRate>100</updateRate>
+      <updateRate>50</updateRate>
       <base_footprint>base_footprint</base_footprint>
       <wheelDiameter>0.254</wheelDiameter>      
       <wheelSeparation>0.556</wheelSeparation>
@@ -213,8 +213,8 @@
       <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
       <leftRearJoint>rear_left_wheel_joint</leftRearJoint>
       <rightRearJoint>rear_right_wheel_joint</rightRearJoint>
-      <torque>60</torque>
-    </plugin>       -->
+      <torque>300</torque>
+    </plugin>      
   </gazebo>    
 
 </robot>

@@ -24,6 +24,16 @@
               <uri>model://ales_lunapit/meshes/LunaPitBoundry.dae</uri> 
             </mesh>
           </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.25</mu>
+                <mu2>0.15</mu2>
+                <slip1>0.35</slip1>
+                <slip2>0.35</slip2>
+              </ode>
+            </friction>
+          </surface>          
         </collision>
         <visual name="base_visual">
           <pose>0 0 0 0 0 0</pose>
